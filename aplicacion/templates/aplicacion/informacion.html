@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicacion</title>
+</head>
+<body>
+    
+    <h1>Página de información</h1>
+
+    <h3>Hoy es: {{hoy}} </h3>
+    <p>{{autor}}</p>
+
+    {% for ani in animales %}
+        <p>{{ani}}</p>
+
+    {% endfor %}
+
+    <table>
+        <tr>
+          <th>Rut</th>
+          <th>Nombre</th>
+          <th>Apllido</th>
+          <th>Fecha nacimiento</th>
+          <th>Sexo</th>
+        </tr>
+        {% for persona in people %}
+        <tr>
+            <td>{{persona.rut}}</td>
+            <td>{{persona.nombre}}</td>
+            <td>{{persona.apellido}}</td>
+            <td>{{persona.f_nacimiento}}</td>
+            <td>{{persona.genero}}</td>
+          </tr>
+        {% endfor %}
+   
+       
+      </table>
+    
+    <a href="{% url 'index' %}">Volver al index</a>
+
+
+
+</body>
+</html>

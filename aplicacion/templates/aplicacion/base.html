@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Ejemplo</title>
+    <link href="{% static 'aplicacion/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'aplicacion/css/miestilo.css' %}" rel="stylesheet" />
+
+    <!-- Latest compiled JavaScript -->
+    <script src="{% static 'aplicacion/js/bootstrap.bundle.min.js' %}"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">App Django</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'personas' %}">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mascotas' %}">Productos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        {% block contenido %}
+
+
+
+
+
+
+        {% endblock contenido %}
+
+
+
+
+
+
+    </div>
+    <footer class="footer bg-dark text-light mt-5">
+        <div class="p-3">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">
+                    un grandioso footer
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+
+    </footer>
+</body>
+
+</html>
