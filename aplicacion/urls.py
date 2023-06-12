@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import include, path
-from .views import crearmascota, index,informacion,personas,mascotas,crearpersona, updatemascota,updatepersona, \
-    eliminarpersona,deletemascota
+from .views import crearmascota, index,personas,mascotas,crearpersona, updatemascota,updatepersona, \
+    eliminarpersona,deletemascota,productosuser, login
 # URLS.py APLICACION
 urlpatterns = [
     path('',index,name='index'),
-    path('informacion',informacion,name='informacion'),
+    path('productosuser',productosuser,name="productosuser"),
     path('personas',personas,name="personas"),
     path('mascotas',mascotas,name="mascotas"),
     path('crearpersona',crearpersona,name="crearpersona"),
@@ -13,5 +13,7 @@ urlpatterns = [
     path('eliminarpersona/<id>',eliminarpersona,name="eliminarpersona"),
     path('crearmascota',crearmascota,name="crearmascota"),
     path('updatemascota/<id>',updatemascota,name="updatemascota"),
-    path('deletemascota/<id>',deletemascota,name="deletemascota")
+    path('deletemascota/<id>',deletemascota,name="deletemascota"),
+    path('login', login, name="login")
+    
 ]

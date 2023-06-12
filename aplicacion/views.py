@@ -7,6 +7,12 @@ from .forms import frmPersona, frmUpdatePersona, frmCrearMascota
 def index(request):
     return render(request,'aplicacion/index.html')
 
+def productosuser(request):
+    return render(request,'aplicacion/productouser.html')
+
+def login(request):
+    return render(request, 'aplicacion/login/iniciarsesion.html')
+
 def mascotas(request):
     pets=Mascota.objects.all()
 
@@ -149,20 +155,3 @@ def eliminarpersona(request,id):
 
 
     return render(request,"aplicacion/personas/delete.html",contexto)
-
-#pagina que no sirve para nada
-def informacion(request):
-    fecha=date.today()
-    autor="El profe"
-    animales=["perro","gato","ñu","narval","manati","womba"]
-    people=Persona.objects.all()
-   
-
-    contexto={
-        "hoy":fecha,
-        "autor":autor,
-        "animales":animales,
-        "people":people
-    }
-
-    return render(request,'aplicacion/informacion.html',contexto)
