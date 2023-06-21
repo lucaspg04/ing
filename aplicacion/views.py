@@ -68,7 +68,7 @@ def deletemascota(request,id):
 
 
     contexto={
- 
+
         "pet":mascota
     }
 
