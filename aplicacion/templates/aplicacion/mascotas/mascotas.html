@@ -13,14 +13,13 @@
             table-success
             align-middle">
             <thead class="table-light">
-                <caption>Productos Registradas</caption>
+                <caption>Productos Registrados</caption>
                 <tr>
                     <th>ID</th>
                     <th>NOMBRE</th>
                     <th>TIPO</th>
                     <th>PRECIO</th>
-                    <th>Acciones</th>
-               
+                    <th>Acciones</th>      
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -33,7 +32,6 @@
                     <td><a href="{% url 'updatemascota' pet.id %}" role="button" class="btn btn-warning text-light">Modificar</a>
                         <a href="{% url 'deletemascota' pet.id %}" role="button" class="btn btn-danger text-light">Eliminar</a> </td>
                     </tr>
-             
                 
                 </tr>
                 {% endfor %}

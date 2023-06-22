@@ -30,6 +30,15 @@
                         <a class="nav-link" href="{% url 'mascotas' %}">Productos</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav" style="position: fixed;right:2%">
+                    {% if user.is_authenticated %}
+                    <li><a class="nav-link" href="#">{{user.username}}</a></li>
+                    <li><a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                    {% else %}
+                    <li><a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a></li>
+                    <li><a class="nav-link" href="{% url 'registro' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>

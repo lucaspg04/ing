@@ -1,7 +1,10 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from datetime import date
-from .models import Persona,Mascota
-from .forms import frmPersona, frmUpdatePersona, frmCrearMascota
+from .models import Persona,Mascota, Producto
+from .forms import frmPersona, frmUpdatePersona, frmCrearMascota,  frmRegistro
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import permission_required, login_required
 
 # Create your views here.
 def index(request):
@@ -10,9 +13,33 @@ def index(request):
 def productosuser(request):
     return render(request,'aplicacion/productouser.html')
 
-def login(request):
-    return render(request, 'aplicacion/login/iniciarsesion.html')
+def listarproducto(request):
+    productos=Producto.objects.all()
+    
+    contexto={
+        "products":productos
+    }
+    
+    return render(request, "aplicacion/index.html", contexto)
 
+def registro(request):
+
+    contexto={
+        "form": frmRegistro
+    }
+    
+    if request.method == 'POST':
+        formulario = frmRegistro(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Registro completado")
+            return redirect(to="index")
+        
+    return render(request, 'registration/registro.html', contexto) 
+
+@login_required
 def mascotas(request):
     pets=Mascota.objects.all()
 
@@ -22,6 +49,7 @@ def mascotas(request):
 
     return render(request,"aplicacion/mascotas/mascotas.html",contexto)
 
+@login_required
 def crearmascota(request):
     form=frmCrearMascota(request.POST or None)
 
@@ -37,6 +65,7 @@ def crearmascota(request):
 
     return render(request,"aplicacion/mascotas/crear.html",contexto)
 
+@login_required
 def updatemascota(request,id):
     mascota=get_object_or_404(Mascota,id=id)
 
@@ -54,7 +83,6 @@ def updatemascota(request,id):
             
             datos=form.cleaned_data
             pet=Mascota.objects.get(id=mascota.id)
-            #pet.id=datos.get("id")
             pet.tipo=datos.get("tipo")
             pet.nombre=datos.get("nombre")
 
@@ -63,6 +91,7 @@ def updatemascota(request,id):
 
     return render(request,"aplicacion/mascotas/update.html",contexto)
 
+@login_required
 def deletemascota(request,id):
     mascota=get_object_or_404(Mascota,id=id)
 
@@ -79,6 +108,7 @@ def deletemascota(request,id):
 
     return render(request,"aplicacion/mascotas/delete.html",contexto)
 
+@login_required
 def personas(request):
     people=Persona.objects.all()
     
@@ -86,10 +116,9 @@ def personas(request):
         "personas":people
     }
     
-
- 
     return render(request,"aplicacion/personas/personas.html",contexto)
 
+@login_required
 def crearpersona(request):
     form=frmPersona(request.POST or None)
 
@@ -105,7 +134,7 @@ def crearpersona(request):
 
     return render(request,"aplicacion/personas/crearpersona.html",contexto)
 
-
+@login_required
 def updatepersona(request,id):
     persona=get_object_or_404(Persona,rut=id)
 
@@ -132,6 +161,7 @@ def updatepersona(request,id):
 
     return render(request,"aplicacion/personas/update.html",contexto)
 
+@login_required
 def eliminarpersona(request,id):
     persona=get_object_or_404(Persona,rut=id)
 
@@ -140,8 +170,6 @@ def eliminarpersona(request,id):
     
     except:
         pet=None
-
-    #print("**********************",pet)
 
     contexto={
  
