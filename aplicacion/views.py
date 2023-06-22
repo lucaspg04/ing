@@ -11,7 +11,7 @@ def index(request):
     return render(request,'aplicacion/index.html')
 
 def productosuser(request):
-    return render(request,'aplicacion/productouser.html')
+    return render(request,'aplicacion/productos.html')
 
 def listarproducto(request):
     productos=Producto.objects.all()
