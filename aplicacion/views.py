@@ -5,6 +5,9 @@ from .forms import frmPersona, frmUpdatePersona, frmCrearMascota,  frmRegistro
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
+
 
 # Create your views here.
 def index(request):
@@ -182,7 +185,7 @@ def eliminarpersona(request,id):
         pet=None
 
     contexto={
- 
+
         "persona":persona,
         "pet":pet
     }
@@ -193,3 +196,22 @@ def eliminarpersona(request,id):
 
 
     return render(request,"aplicacion/personas/delete.html",contexto)
+
+
+@login_required
+def crear_usuario(request):
+    grupos = Group.objects.all()
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            grupo_id = request.POST.get('grupo')
+            grupo = Group.objects.get(id=grupo_id)
+            user.groups.add(grupo)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    
+    context = {'form': form, 'grupos': grupos}
+    return render(request, 'aplicacion/crearempleado.html', context)

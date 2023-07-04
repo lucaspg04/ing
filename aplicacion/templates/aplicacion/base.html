@@ -29,13 +29,18 @@
                         <a class="nav-link" href="{% url 'productosuser' %}">Productos</a>
                     </li>
                     <li class="nav-item">
-                        {% if perms.add %}
+                        {% if perms.aplicacion.view_persona %}
                         <a class="nav-link" href="{% url 'personas' %}">Clientes</a>
                         {% endif %}
                     </li>
                     <li class="nav-item">
-                        {% if perms.add %}
+                        {% if perms.aplicacion.view_producto %}
                         <a class="nav-link" href="{% url 'mascotas' %}">Productos (admin)</a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        {% if perms.add %}
+                        <a class="nav-link" href="{% url 'crearempleado' %}">Empleados</a>
                         {% endif %}
                     </li>
                 </ul>
