@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import permission_required, login_required
 
 # Create your views here.
 def index(request):
+    return render(request,'aplicacion/index.html')
+
+def productosuser(request):
+    return render(request,'aplicacion/productouser.html')
+
+def listarproducto(request):
     productos=Producto.objects.all()
     
     contexto={

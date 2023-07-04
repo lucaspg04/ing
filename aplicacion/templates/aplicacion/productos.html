@@ -1,0 +1,70 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="row mt-4">
+    <div class="col-4">
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="{% static 'aplicacion/img/bici.jpg' %}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">Bicicleta Atletis</h4>
+              <p class="card-text">$500.000</p>
+              <a href="#" class="btn btn-primary">Ver productos</a>
+            </div>
+          </div>
+    </div>
+    <div class="col-4">
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="{% static 'aplicacion/img/bici3.jpg' %}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">Bicicleta Zoo York</h4>
+              <p class="card-text">$800.000</p>
+              <a href="{% url 'productosuser' %}" class="btn btn-primary">Ver productos</a>
+            </div>
+          </div>
+    </div>
+    <div class="col-4">
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="{% static 'aplicacion/img/guantes.jpg' %}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">Guantes Rockbros</h4>
+              <p class="card-text">$25.000</p>
+              <a href="{% url 'productosuser' %}" class="btn btn-primary">Ver productos</a>
+            </div>
+          </div>
+    </div>
+    <div class="col-4">
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="{% static 'aplicacion/img/bici2.jpg' %}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">Bicicleta Jeep</h4>
+              <p class="card-text">$900.000</p>
+              <a href="#" class="btn btn-primary">Ver productos</a>
+            </div>
+          </div>
+    </div>
+    <div class="col-4">
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="{% static 'aplicacion/img/bici4.jpg' %}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">Bicicleta Trek</h4>
+              <p class="card-text">$600.000</p>
+              <a href="{% url 'productosuser' %}" class="btn btn-primary">Ver productos</a>
+            </div>
+          </div>
+    </div>
+    <div class="col-4">
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="{% static 'aplicacion/img/guantes2.jpg' %}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">Guantes Fox</h4>
+              <p class="card-text">$30.000</p>
+              <a href="{% url 'productosuser' %}" class="btn btn-primary">Ver productos</a>
+            </div>
+          </div>
+    </div>
+
+</div>
+
+{% endblock contenido %}
