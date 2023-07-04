@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render,get_object_or_404,render, redirect
 from datetime import date
 from .models import Persona,Mascota, Producto
 from .forms import frmPersona, frmUpdatePersona, frmCrearMascota,  frmRegistro
@@ -8,19 +8,15 @@ from django.contrib.auth.decorators import permission_required, login_required
 
 # Create your views here.
 def index(request):
-    return render(request,'aplicacion/index.html')
-
-def productosuser(request):
-    return render(request,'aplicacion/productouser.html')
-
-def listarproducto(request):
     productos=Producto.objects.all()
     
     contexto={
         "products":productos
     }
-    
-    return render(request, "aplicacion/index.html", contexto)
+    return render(request,'aplicacion/index.html', contexto)
+
+def productosuser(request):
+    return render(request,'aplicacion/productouser.html')
 
 def registro(request):
 
@@ -32,11 +28,13 @@ def registro(request):
         formulario = frmRegistro(data=request.POST)
         if formulario.is_valid():
             formulario.save()
+            messages.success(request, "Te has registrado correctamente!")
             user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
-            messages.success(request, "Registro completado")
             return redirect(to="index")
-        
+        else:
+            for msg in formulario.error_messages:
+                messages.error(request, formulario.error_messages[msg])
     return render(request, 'registration/registro.html', contexto) 
 
 @login_required
@@ -120,19 +118,25 @@ def personas(request):
 
 @login_required
 def crearpersona(request):
-    form=frmPersona(request.POST or None)
+    formulario = frmPersona(request.POST or None)
 
-    contexto={
-        "form":form
+    if request.method == "POST":
+        if formulario.is_valid():
+            persona = formulario.save(commit=False)
+            # Realizar las validaciones necesarias antes de guardar los cambios
+            persona.save()
+            return redirect(to="personas")
+        else:
+            messages.error(request, "Error: Completa todos los campos y/o verifica el Rut")
+
+    contexto = {
+        "form": formulario
     }
 
-    if request.method=="POST":
-        if form.is_valid():
-            form.save()
-            return redirect(to="personas")
-        
+    return render(request, "aplicacion/personas/crearpersona.html", contexto)
 
-    return render(request,"aplicacion/personas/crearpersona.html",contexto)
+
+
 
 @login_required
 def updatepersona(request,id):

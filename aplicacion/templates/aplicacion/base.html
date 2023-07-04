@@ -12,6 +12,8 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="{% static 'aplicacion/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -44,6 +46,23 @@
     </nav>
 
     <div class="container">
+
+        {% if messages %}
+            {% for m in messages %}
+            <script>
+                Swal.fire({
+                    title: '¡Exito!',
+                    text: '{{m}}',
+                    icon: 'success'
+                })
+                Swal.fire({
+                    title: 'Error!',
+                    html: '{{m}}',
+                    icon: 'error'
+                })
+            </script>
+            {% endfor %}
+        {% endif %}
 
         {% block contenido %}
 
